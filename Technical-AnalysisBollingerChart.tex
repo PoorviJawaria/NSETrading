@@ -1,0 +1,629 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Technical-AnalysisBollingerChart.r},
+  pdfauthor={pjawaria},
+  pdfborder={0 0 0},
+  breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-2}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\title{Technical-AnalysisBollingerChart.r}
+\author{pjawaria}
+\date{2020-07-08}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Title: Technical Analysis Using R}
+
+\CommentTok{# Google "bse stock price historical data" and download the stock price data for, say, BSE stock LT}
+\CommentTok{# copy the .csv file from 'downloads' directory of the computer & save it at any convenient }
+\CommentTok{# directory location}
+
+\CommentTok{# Copy the full R code given below and paste it in the source code window of R Studio}
+
+\CommentTok{# module A: Data Input }
+\CommentTok{# module A1: SMA}
+\CommentTok{# module A2; EMA}
+\CommentTok{# module A3: Bollinger Bands}
+\CommentTok{# module A4: MACD}
+\CommentTok{# module A5: RSI}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# module A: Data Input}
+
+\KeywordTok{setwd}\NormalTok{(}\StringTok{"C://Users//pjawaria//Desktop//NSE Stock Research"}\NormalTok{)}
+
+\KeywordTok{getwd}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "C:/Users/pjawaria/Desktop/NSE Stock Research"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{input <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"LT Apr-May-Jun.csv"}\NormalTok{ , }\DataTypeTok{sep=}\StringTok{","}\NormalTok{, }\DataTypeTok{header=}\NormalTok{T)}
+\KeywordTok{head}\NormalTok{(input)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        Date Symbol Series Open.Price High.Price Low.Price Last.Traded.Price
+## 1  1-Jul-20     LT     EQ      941.0     941.00    917.00            924.85
+## 2 30-Jun-20     LT     EQ      948.7     952.15    931.40            945.00
+## 3 29-Jun-20     LT     EQ      950.0     956.10    930.00            938.20
+## 4 26-Jun-20     LT     EQ      955.0     976.10    940.50            959.15
+## 5 25-Jun-20     LT     EQ      949.9     964.80    936.25            942.65
+## 6 24-Jun-20     LT     EQ      979.0     989.90    952.00            965.00
+##   Close.Price Total.Traded.Quantity Turnover..in.Lakhs.
+## 1      924.30               6426447            59378.96
+## 2      943.65               3656535            34477.30
+## 3      936.60               4575981            42912.48
+## 4      962.20               6554208            62783.65
+## 5      943.10               7508089            71234.37
+## 6      955.55              11985144           116243.27
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{datadf<-}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{TrDate=}\KeywordTok{as.Date}\NormalTok{(input}\OperatorTok{$}\NormalTok{Date,}\DataTypeTok{format=}\StringTok{"%d-%b-%Y"}\NormalTok{), }
+                   \DataTypeTok{OpenPrice=}\NormalTok{input}\OperatorTok{$}\NormalTok{Open.Price, }
+                   \DataTypeTok{HighPrice=}\NormalTok{input}\OperatorTok{$}\NormalTok{High.Price, }
+                   \DataTypeTok{LowPrice=}\NormalTok{input}\OperatorTok{$}\NormalTok{Low.Price, }
+                   \DataTypeTok{ClosePrice=}\NormalTok{input}\OperatorTok{$}\NormalTok{Close.Price,}
+                   \DataTypeTok{volume=}\NormalTok{input}\OperatorTok{$}\NormalTok{Total.Traded.Quantity}
+\NormalTok{)}
+
+\NormalTok{abc<-datadf[}\KeywordTok{order}\NormalTok{(datadf}\OperatorTok{$}\NormalTok{TrDate, }\DataTypeTok{decreasing=}\NormalTok{F),]}
+\KeywordTok{rownames}\NormalTok{(abc)<-}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(datadf))}
+\KeywordTok{str}\NormalTok{(abc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    59 obs. of  6 variables:
+##  $ TrDate    : Date, format: "0020-04-03" "0020-04-07" ...
+##  $ OpenPrice : num  791 805 804 834 813 ...
+##  $ HighPrice : num  791 813 832 834 872 ...
+##  $ LowPrice  : num  763 791 798 804 808 ...
+##  $ ClosePrice: num  775 802 807 813 865 ...
+##  $ volume    : int  4268501 5769216 6151093 6410629 9462929 10435586 6980628 5827735 4958437 5122597 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(abc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       TrDate OpenPrice HighPrice LowPrice ClosePrice   volume
+## 1 0020-04-03    791.10    791.10   762.80     774.65  4268501
+## 2 0020-04-07    805.00    813.00   791.00     801.65  5769216
+## 3 0020-04-08    804.00    832.00   797.70     807.10  6151093
+## 4 0020-04-09    834.35    834.35   804.40     812.80  6410629
+## 5 0020-04-13    812.80    872.40   807.95     865.45  9462929
+## 6 0020-04-15    890.95    926.60   869.00     880.15 10435586
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{abc}\OperatorTok{$}\NormalTok{TrDate<-}\KeywordTok{as.character}\NormalTok{(abc}\OperatorTok{$}\NormalTok{TrDate, }\DataTypeTok{format=}\StringTok{"%d-%b-%y"}\NormalTok{)}
+\KeywordTok{head}\NormalTok{(abc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      TrDate OpenPrice HighPrice LowPrice ClosePrice   volume
+## 1 03-Apr-20    791.10    791.10   762.80     774.65  4268501
+## 2 07-Apr-20    805.00    813.00   791.00     801.65  5769216
+## 3 08-Apr-20    804.00    832.00   797.70     807.10  6151093
+## 4 09-Apr-20    834.35    834.35   804.40     812.80  6410629
+## 5 13-Apr-20    812.80    872.40   807.95     865.45  9462929
+## 6 15-Apr-20    890.95    926.60   869.00     880.15 10435586
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tail}\NormalTok{(abc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       TrDate OpenPrice HighPrice LowPrice ClosePrice   volume
+## 54 24-Jun-20     979.0    989.90   952.00     955.55 11985144
+## 55 25-Jun-20     949.9    964.80   936.25     943.10  7508089
+## 56 26-Jun-20     955.0    976.10   940.50     962.20  6554208
+## 57 29-Jun-20     950.0    956.10   930.00     936.60  4575981
+## 58 30-Jun-20     948.7    952.15   931.40     943.65  3656535
+## 59 01-Jul-20     941.0    941.00   917.00     924.30  6426447
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(TTR)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'TTR' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# module A: Data Input End}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# module A1}
+\CommentTok{# Technical Analysis: SMA}
+
+\NormalTok{sma<-}\KeywordTok{SMA}\NormalTok{(abc}\OperatorTok{$}\NormalTok{ClosePrice, }\DataTypeTok{n=}\DecValTok{20}\NormalTok{)}
+\NormalTok{xyz<-}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{TrDate=}\NormalTok{abc}\OperatorTok{$}\NormalTok{TrDate, }\DataTypeTok{ClosePrice=}\NormalTok{abc}\OperatorTok{$}\NormalTok{ClosePrice, }\DataTypeTok{volume=}\NormalTok{abc}\OperatorTok{$}\NormalTok{volume, sma)}
+\KeywordTok{head}\NormalTok{(xyz, }\DecValTok{24}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       TrDate ClosePrice   volume      sma
+## 1  03-Apr-20     774.65  4268501       NA
+## 2  07-Apr-20     801.65  5769216       NA
+## 3  08-Apr-20     807.10  6151093       NA
+## 4  09-Apr-20     812.80  6410629       NA
+## 5  13-Apr-20     865.45  9462929       NA
+## 6  15-Apr-20     880.15 10435586       NA
+## 7  16-Apr-20     911.65  6980628       NA
+## 8  17-Apr-20     932.90  5827735       NA
+## 9  20-Apr-20     915.60  4958437       NA
+## 10 21-Apr-20     870.35  5122597       NA
+## 11 22-Apr-20     852.60  6090177       NA
+## 12 23-Apr-20     840.60  6322048       NA
+## 13 24-Apr-20     851.20  7960660       NA
+## 14 27-Apr-20     855.25  4224467       NA
+## 15 28-Apr-20     857.15  3773038       NA
+## 16 29-Apr-20     875.35  4841417       NA
+## 17 30-Apr-20     897.55  6333023       NA
+## 18 04-May-20     850.65  4678679       NA
+## 19 05-May-20     836.90  4296534       NA
+## 20 06-May-20     837.30  5081614 856.3425
+## 21 07-May-20     822.85  3529156 858.7525
+## 22 08-May-20     815.95  4394534 859.4675
+## 23 11-May-20     821.60  2882960 860.1925
+## 24 12-May-20     814.80  3024386 860.2925
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{layout}\NormalTok{(}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{), }\DataTypeTok{nrow=}\DecValTok{5}\NormalTok{, }\DataTypeTok{ncol=}\DecValTok{1}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(abc}\OperatorTok{$}\NormalTok{ClosePrice, }\DataTypeTok{xaxt=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\DecValTok{2}\NormalTok{, }\DataTypeTok{xlab=}\StringTok{"Date"}\NormalTok{, }\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\KeywordTok{min}\NormalTok{(abc}\OperatorTok{$}\NormalTok{ClosePrice)}\OperatorTok{*}\FloatTok{0.95}\NormalTok{, }\KeywordTok{max}\NormalTok{(abc}\OperatorTok{$}\NormalTok{ClosePrice)}\OperatorTok{*}\FloatTok{1.05}\NormalTok{), }\DataTypeTok{ylab=} \StringTok{"Close Price"}\NormalTok{, }\DataTypeTok{main=}\StringTok{"SMA20"}\NormalTok{, }\DataTypeTok{lwd=}\DecValTok{2}\NormalTok{)}
+\KeywordTok{axis}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{at=}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(abc), }\DataTypeTok{labels=}\NormalTok{abc}\OperatorTok{$}\NormalTok{TrDate)}
+\KeywordTok{axis}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DataTypeTok{tck=}\DecValTok{1}\NormalTok{, }\DataTypeTok{col.ticks=}\StringTok{"lightgray"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{0}\OperatorTok{:}\DecValTok{10}\NormalTok{)\{}
+  \KeywordTok{abline}\NormalTok{(}\DataTypeTok{v=}\NormalTok{i}\OperatorTok{*}\KeywordTok{nrow}\NormalTok{(abc)}\OperatorTok{/}\DecValTok{10}\NormalTok{, }\DataTypeTok{lty=}\DecValTok{2}\NormalTok{, }\DataTypeTok{col=}\StringTok{"lightgray"}\NormalTok{)}
+\NormalTok{\}}
+
+\KeywordTok{lines}\NormalTok{(xyz}\OperatorTok{$}\NormalTok{sma, }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{'blue'}\NormalTok{)}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\DataTypeTok{lty=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{), }\DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\StringTok{'red'}\NormalTok{, }\StringTok{'blue'}\NormalTok{), }\DataTypeTok{legend=}\KeywordTok{c}\NormalTok{(}\StringTok{"Close Price"}\NormalTok{, }\StringTok{"SMA20"}\NormalTok{), }\DataTypeTok{bty=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{0.6}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(abc}\OperatorTok{$}\NormalTok{volume, }\DataTypeTok{type=}\StringTok{"h"}\NormalTok{, }\DataTypeTok{xaxt=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"green"}\NormalTok{, }\DataTypeTok{xlab=}\StringTok{""}\NormalTok{, }\DataTypeTok{main=}\StringTok{""}\NormalTok{, }\DataTypeTok{sub=}\StringTok{""}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"volume"}\NormalTok{)}
+\KeywordTok{axis}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{at=}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(abc), }\DataTypeTok{labels=}\NormalTok{abc}\OperatorTok{$}\NormalTok{TrDate)}
+\KeywordTok{axis}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DataTypeTok{tck=}\DecValTok{1}\NormalTok{, }\DataTypeTok{col.ticks=}\StringTok{"lightgray"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{0}\OperatorTok{:}\DecValTok{10}\NormalTok{)\{}
+  \KeywordTok{abline}\NormalTok{(}\DataTypeTok{v=}\NormalTok{i}\OperatorTok{*}\KeywordTok{nrow}\NormalTok{(abc)}\OperatorTok{/}\DecValTok{10}\NormalTok{, }\DataTypeTok{lty=}\DecValTok{2}\NormalTok{, }\DataTypeTok{col=}\StringTok{"lightgray"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Technical-AnalysisBollingerChart_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# module A1 End}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# module A2}
+\CommentTok{# Technical Analysis: EMA}
+
+\NormalTok{ema<-}\KeywordTok{EMA}\NormalTok{(abc}\OperatorTok{$}\NormalTok{ClosePrice, }\DataTypeTok{n=}\DecValTok{20}\NormalTok{)}
+\NormalTok{xyz<-}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{TrDate=}\NormalTok{abc}\OperatorTok{$}\NormalTok{TrDate, }\DataTypeTok{ClosePrice=}\NormalTok{abc}\OperatorTok{$}\NormalTok{ClosePrice, }\DataTypeTok{volume=}\NormalTok{abc}\OperatorTok{$}\NormalTok{volume, ema)}
+\KeywordTok{head}\NormalTok{(xyz,}\DecValTok{24}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       TrDate ClosePrice   volume      ema
+## 1  03-Apr-20     774.65  4268501       NA
+## 2  07-Apr-20     801.65  5769216       NA
+## 3  08-Apr-20     807.10  6151093       NA
+## 4  09-Apr-20     812.80  6410629       NA
+## 5  13-Apr-20     865.45  9462929       NA
+## 6  15-Apr-20     880.15 10435586       NA
+## 7  16-Apr-20     911.65  6980628       NA
+## 8  17-Apr-20     932.90  5827735       NA
+## 9  20-Apr-20     915.60  4958437       NA
+## 10 21-Apr-20     870.35  5122597       NA
+## 11 22-Apr-20     852.60  6090177       NA
+## 12 23-Apr-20     840.60  6322048       NA
+## 13 24-Apr-20     851.20  7960660       NA
+## 14 27-Apr-20     855.25  4224467       NA
+## 15 28-Apr-20     857.15  3773038       NA
+## 16 29-Apr-20     875.35  4841417       NA
+## 17 30-Apr-20     897.55  6333023       NA
+## 18 04-May-20     850.65  4678679       NA
+## 19 05-May-20     836.90  4296534       NA
+## 20 06-May-20     837.30  5081614 856.3425
+## 21 07-May-20     822.85  3529156 853.1527
+## 22 08-May-20     815.95  4394534 849.6096
+## 23 11-May-20     821.60  2882960 846.9420
+## 24 12-May-20     814.80  3024386 843.8809
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{layout}\NormalTok{(}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{), }\DataTypeTok{nrow=}\DecValTok{5}\NormalTok{, }\DataTypeTok{ncol=}\DecValTok{1}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(abc}\OperatorTok{$}\NormalTok{ClosePrice, }\DataTypeTok{xaxt=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\DecValTok{2}\NormalTok{, }\DataTypeTok{xlab=}\StringTok{"Date"}\NormalTok{, }\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\KeywordTok{min}\NormalTok{(abc}\OperatorTok{$}\NormalTok{ClosePrice)}\OperatorTok{*}\FloatTok{0.95}\NormalTok{, }\KeywordTok{max}\NormalTok{(abc}\OperatorTok{$}\NormalTok{ClosePrice)}\OperatorTok{*}\FloatTok{1.05}\NormalTok{), }\DataTypeTok{ylab=}\StringTok{"Close Price"}\NormalTok{, }\DataTypeTok{main=}\StringTok{"EMA20"}\NormalTok{)}
+\KeywordTok{axis}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{at=}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(abc), }\DataTypeTok{labels=}\NormalTok{abc}\OperatorTok{$}\NormalTok{TrDate)}
+\KeywordTok{axis}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DataTypeTok{tck=}\DecValTok{1}\NormalTok{, }\DataTypeTok{col.ticks=}\StringTok{"lightgray"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{0}\OperatorTok{:}\DecValTok{10}\NormalTok{)\{}
+  \KeywordTok{abline}\NormalTok{(}\DataTypeTok{v=}\NormalTok{i}\OperatorTok{*}\KeywordTok{nrow}\NormalTok{(abc)}\OperatorTok{/}\DecValTok{10}\NormalTok{, }\DataTypeTok{lty=}\DecValTok{2}\NormalTok{, }\DataTypeTok{col=}\StringTok{"lightgray"}\NormalTok{)}
+\NormalTok{\}}
+
+\KeywordTok{lines}\NormalTok{(xyz}\OperatorTok{$}\NormalTok{ema, }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{'blue'}\NormalTok{)}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\DataTypeTok{lty=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{), }\DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\StringTok{'red'}\NormalTok{, }\StringTok{'blue'}\NormalTok{), }\DataTypeTok{legend=}\KeywordTok{c}\NormalTok{(}\StringTok{"Close Price"}\NormalTok{, }\StringTok{"SMA"}\NormalTok{), }\DataTypeTok{bty=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{0.6}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(abc}\OperatorTok{$}\NormalTok{volume, }\DataTypeTok{type=}\StringTok{"h"}\NormalTok{, }\DataTypeTok{xaxt=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"green"}\NormalTok{, }\DataTypeTok{xlab=}\StringTok{""}\NormalTok{, }\DataTypeTok{main=}\StringTok{""}\NormalTok{, }\DataTypeTok{sub=}\StringTok{""}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"volume"}\NormalTok{)}
+\KeywordTok{axis}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{at=}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(abc), }\DataTypeTok{labels=}\NormalTok{abc}\OperatorTok{$}\NormalTok{TrDate)}
+\KeywordTok{axis}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DataTypeTok{tck=}\DecValTok{1}\NormalTok{, }\DataTypeTok{col.ticks=}\StringTok{"lightgray"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{0}\OperatorTok{:}\DecValTok{10}\NormalTok{)\{}
+  \KeywordTok{abline}\NormalTok{(}\DataTypeTok{v=}\NormalTok{i}\OperatorTok{*}\KeywordTok{nrow}\NormalTok{(abc)}\OperatorTok{/}\DecValTok{10}\NormalTok{, }\DataTypeTok{lty=}\DecValTok{2}\NormalTok{, }\DataTypeTok{col=}\StringTok{"lightgray"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Technical-AnalysisBollingerChart_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# module A2 End}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# module A3}
+\CommentTok{# Technical Analysis: Bollinger Bands}
+
+\NormalTok{bb20<-}\KeywordTok{BBands}\NormalTok{(abc}\OperatorTok{$}\NormalTok{ClosePrice, }\DataTypeTok{sd=}\DecValTok{2}\NormalTok{)}
+\NormalTok{xyz<-}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{TrDate=}\NormalTok{abc}\OperatorTok{$}\NormalTok{TrDate, }\DataTypeTok{ClosePrice=}\NormalTok{abc}\OperatorTok{$}\NormalTok{ClosePrice, }\DataTypeTok{volume=}\NormalTok{abc}\OperatorTok{$}\NormalTok{volume, bb20)}
+\KeywordTok{head}\NormalTok{(xyz,}\DecValTok{24}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       TrDate ClosePrice   volume       dn     mavg       up      pctB
+## 1  03-Apr-20     774.65  4268501       NA       NA       NA        NA
+## 2  07-Apr-20     801.65  5769216       NA       NA       NA        NA
+## 3  08-Apr-20     807.10  6151093       NA       NA       NA        NA
+## 4  09-Apr-20     812.80  6410629       NA       NA       NA        NA
+## 5  13-Apr-20     865.45  9462929       NA       NA       NA        NA
+## 6  15-Apr-20     880.15 10435586       NA       NA       NA        NA
+## 7  16-Apr-20     911.65  6980628       NA       NA       NA        NA
+## 8  17-Apr-20     932.90  5827735       NA       NA       NA        NA
+## 9  20-Apr-20     915.60  4958437       NA       NA       NA        NA
+## 10 21-Apr-20     870.35  5122597       NA       NA       NA        NA
+## 11 22-Apr-20     852.60  6090177       NA       NA       NA        NA
+## 12 23-Apr-20     840.60  6322048       NA       NA       NA        NA
+## 13 24-Apr-20     851.20  7960660       NA       NA       NA        NA
+## 14 27-Apr-20     855.25  4224467       NA       NA       NA        NA
+## 15 28-Apr-20     857.15  3773038       NA       NA       NA        NA
+## 16 29-Apr-20     875.35  4841417       NA       NA       NA        NA
+## 17 30-Apr-20     897.55  6333023       NA       NA       NA        NA
+## 18 04-May-20     850.65  4678679       NA       NA       NA        NA
+## 19 05-May-20     836.90  4296534       NA       NA       NA        NA
+## 20 06-May-20     837.30  5081614 778.3866 856.3425 934.2984 0.3778636
+## 21 07-May-20     822.85  3529156 788.4425 858.7525 929.0625 0.2446844
+## 22 08-May-20     815.95  4394534 791.2346 859.4675 927.7004 0.1811105
+## 23 11-May-20     821.60  2882960 793.9208 860.1925 926.4642 0.2088314
+## 24 12-May-20     814.80  3024386 794.3017 860.2925 926.2833 0.1553119
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{layout}\NormalTok{(}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{), }\DataTypeTok{nrow=}\DecValTok{5}\NormalTok{, }\DataTypeTok{ncol=}\DecValTok{1}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(abc}\OperatorTok{$}\NormalTok{ClosePrice, }\DataTypeTok{xaxt=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\DecValTok{2}\NormalTok{, }\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\KeywordTok{min}\NormalTok{(abc}\OperatorTok{$}\NormalTok{ClosePrice)}\OperatorTok{*}\FloatTok{0.95}\NormalTok{, }\KeywordTok{max}\NormalTok{(abc}\OperatorTok{$}\NormalTok{ClosePrice)}\OperatorTok{*}\FloatTok{1.05}\NormalTok{), }\DataTypeTok{xlab=}\StringTok{"Date"}\NormalTok{, }\DataTypeTok{main=}\StringTok{""}\NormalTok{, }\DataTypeTok{sub=}\StringTok{""}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"Close Price"}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{0.6}\NormalTok{)}
+\KeywordTok{axis}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{at=}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(abc), }\DataTypeTok{labels=}\NormalTok{abc}\OperatorTok{$}\NormalTok{TrDate)}
+\KeywordTok{axis}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DataTypeTok{tck=}\DecValTok{1}\NormalTok{, }\DataTypeTok{col.ticks=}\StringTok{"lightgray"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{0}\OperatorTok{:}\DecValTok{10}\NormalTok{)\{}
+  \KeywordTok{abline}\NormalTok{(}\DataTypeTok{v=}\NormalTok{i}\OperatorTok{*}\KeywordTok{nrow}\NormalTok{(abc)}\OperatorTok{/}\DecValTok{10}\NormalTok{, }\DataTypeTok{lty=}\DecValTok{2}\NormalTok{, }\DataTypeTok{col=}\StringTok{"lightgray"}\NormalTok{)}
+\NormalTok{\}}
+
+\KeywordTok{lines}\NormalTok{(xyz}\OperatorTok{$}\NormalTok{up, }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{'purple'}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(xyz}\OperatorTok{$}\NormalTok{dn, }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{'purple'}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(xyz}\OperatorTok{$}\NormalTok{mavg, }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{'blue'}\NormalTok{)}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\StringTok{'red'}\NormalTok{, }\StringTok{'purple'}\NormalTok{, }\StringTok{'purple'}\NormalTok{, }\StringTok{'blue'}\NormalTok{), }\DataTypeTok{lty=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{), }\DataTypeTok{legend=}\KeywordTok{c}\NormalTok{(}\StringTok{'Close Price'}\NormalTok{, }\StringTok{'up'}\NormalTok{, }\StringTok{'dn'}\NormalTok{, }\StringTok{'mavg'}\NormalTok{), }\DataTypeTok{bty=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{0.6}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(abc}\OperatorTok{$}\NormalTok{volume, }\DataTypeTok{type=}\StringTok{"h"}\NormalTok{, }\DataTypeTok{xaxt=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"green"}\NormalTok{, }\DataTypeTok{xlab=}\StringTok{""}\NormalTok{, }\DataTypeTok{main=}\StringTok{""}\NormalTok{, }\DataTypeTok{sub=}\StringTok{""}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"volume"}\NormalTok{)}
+\KeywordTok{axis}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{at=}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(abc), }\DataTypeTok{labels=}\NormalTok{abc}\OperatorTok{$}\NormalTok{TrDate)}
+\KeywordTok{axis}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DataTypeTok{tck=}\DecValTok{1}\NormalTok{, }\DataTypeTok{col.ticks=}\StringTok{"lightgray"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{0}\OperatorTok{:}\DecValTok{10}\NormalTok{)\{}
+  \KeywordTok{abline}\NormalTok{(}\DataTypeTok{v=}\NormalTok{i}\OperatorTok{*}\KeywordTok{nrow}\NormalTok{(abc)}\OperatorTok{/}\DecValTok{10}\NormalTok{, }\DataTypeTok{lty=}\DecValTok{2}\NormalTok{, }\DataTypeTok{col=}\StringTok{"lightgray"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Technical-AnalysisBollingerChart_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# module A3 End}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# module A4}
+\CommentTok{#Technical Analysis: MACD}
+
+\CommentTok{# Let us calculate standard(12,26,9) MACD}
+
+\NormalTok{macd<-}\KeywordTok{MACD}\NormalTok{(abc}\OperatorTok{$}\NormalTok{ClosePrice, }\DataTypeTok{nFast=}\DecValTok{12}\NormalTok{, }\DataTypeTok{nSlow=}\DecValTok{26}\NormalTok{, }\DataTypeTok{nSig=}\DecValTok{9}\NormalTok{, }\DataTypeTok{maType=}\NormalTok{SMA)}
+\NormalTok{xyz<-}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{TrDate=}\NormalTok{abc}\OperatorTok{$}\NormalTok{TrDate, }\DataTypeTok{ClosePrice=}\NormalTok{abc}\OperatorTok{$}\NormalTok{ClosePrice, }\DataTypeTok{volume=}\NormalTok{abc}\OperatorTok{$}\NormalTok{volume, macd)}
+\KeywordTok{head}\NormalTok{(xyz,}\DecValTok{40}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       TrDate ClosePrice   volume       macd     signal
+## 1  03-Apr-20     774.65  4268501         NA         NA
+## 2  07-Apr-20     801.65  5769216         NA         NA
+## 3  08-Apr-20     807.10  6151093         NA         NA
+## 4  09-Apr-20     812.80  6410629         NA         NA
+## 5  13-Apr-20     865.45  9462929         NA         NA
+## 6  15-Apr-20     880.15 10435586         NA         NA
+## 7  16-Apr-20     911.65  6980628         NA         NA
+## 8  17-Apr-20     932.90  5827735         NA         NA
+## 9  20-Apr-20     915.60  4958437         NA         NA
+## 10 21-Apr-20     870.35  5122597         NA         NA
+## 11 22-Apr-20     852.60  6090177         NA         NA
+## 12 23-Apr-20     840.60  6322048         NA         NA
+## 13 24-Apr-20     851.20  7960660         NA         NA
+## 14 27-Apr-20     855.25  4224467         NA         NA
+## 15 28-Apr-20     857.15  3773038         NA         NA
+## 16 29-Apr-20     875.35  4841417         NA         NA
+## 17 30-Apr-20     897.55  6333023         NA         NA
+## 18 04-May-20     850.65  4678679         NA         NA
+## 19 05-May-20     836.90  4296534         NA         NA
+## 20 06-May-20     837.30  5081614         NA         NA
+## 21 07-May-20     822.85  3529156         NA         NA
+## 22 08-May-20     815.95  4394534         NA         NA
+## 23 11-May-20     821.60  2882960         NA         NA
+## 24 12-May-20     814.80  3024386         NA         NA
+## 25 13-May-20     862.90  8625530         NA         NA
+## 26 14-May-20     871.65  6778688 -0.5113327         NA
+## 27 15-May-20     864.40  5654025 -0.8423935         NA
+## 28 18-May-20     813.35  6211450 -1.4986326         NA
+## 29 19-May-20     796.35  5533176 -2.4374680         NA
+## 30 20-May-20     835.00  5950015 -2.6872139         NA
+## 31 21-May-20     820.50  4701980 -2.6502451         NA
+## 32 22-May-20     815.70  4609134 -2.5782404         NA
+## 33 26-May-20     825.55  4335430 -2.1713748         NA
+## 34 27-May-20     850.85  5159303 -1.4619018 -1.8709781
+## 35 28-May-20     905.50 11481632 -0.5888620 -1.8795925
+## 36 29-May-20     932.25 10166680  0.2871900 -1.7540832
+## 37 01-Jun-20     928.15  7617393  0.5840683 -1.5226720
+## 38 02-Jun-20     945.45  7325689  0.8292369 -1.1597048
+## 39 03-Jun-20     961.30  4651583  1.2726173 -0.7197235
+## 40 04-Jun-20     930.70  5355971  2.0669475 -0.1955910
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{layout}\NormalTok{(}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{), }\DataTypeTok{nrow=}\DecValTok{5}\NormalTok{, }\DataTypeTok{ncol=}\DecValTok{1}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(abc}\OperatorTok{$}\NormalTok{ClosePrice, }\DataTypeTok{xaxt=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\DecValTok{2}\NormalTok{, }\DataTypeTok{xlab=}\StringTok{"Date"}\NormalTok{, }\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\KeywordTok{min}\NormalTok{(abc}\OperatorTok{$}\NormalTok{ClosePrice)}\OperatorTok{*}\FloatTok{0.95}\NormalTok{, }\KeywordTok{max}\NormalTok{(abc}\OperatorTok{$}\NormalTok{ClosePrice)}\OperatorTok{*}\FloatTok{1.05}\NormalTok{), }\DataTypeTok{ylab=}\StringTok{"Close Price"}\NormalTok{, }\DataTypeTok{mai=}\KeywordTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{,}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.1}\NormalTok{,}\FloatTok{0.1}\NormalTok{), }\DataTypeTok{main=}\OtherTok{NA}\NormalTok{, }\DataTypeTok{sub=}\OtherTok{NA}\NormalTok{)}
+\KeywordTok{axis}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{at=}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(abc), }\DataTypeTok{labels=}\NormalTok{abc}\OperatorTok{$}\NormalTok{TrDate)}
+\KeywordTok{axis}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DataTypeTok{tck=}\DecValTok{1}\NormalTok{, }\DataTypeTok{col.ticks=}\StringTok{"lightgray"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{0}\OperatorTok{:}\DecValTok{10}\NormalTok{)\{}
+  \KeywordTok{abline}\NormalTok{(}\DataTypeTok{v=}\NormalTok{i}\OperatorTok{*}\KeywordTok{nrow}\NormalTok{(abc)}\OperatorTok{/}\DecValTok{10}\NormalTok{, }\DataTypeTok{lty=}\DecValTok{2}\NormalTok{, }\DataTypeTok{col=}\StringTok{"lightgray"}\NormalTok{)}
+\NormalTok{\}}
+
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\DataTypeTok{col=}\StringTok{'red'}\NormalTok{, }\DataTypeTok{lty=}\DecValTok{1}\NormalTok{, }\DataTypeTok{legend=}\KeywordTok{c}\NormalTok{(}\StringTok{'Close Price'}\NormalTok{), }\DataTypeTok{bty=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{0.6}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(xyz}\OperatorTok{$}\NormalTok{macd, }\DataTypeTok{xaxt=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"MACD/Signal"}\NormalTok{, }\DataTypeTok{mai=}\KeywordTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{,}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.1}\NormalTok{,}\FloatTok{0.1}\NormalTok{), }\DataTypeTok{xlab=}\OtherTok{NA}\NormalTok{, }\DataTypeTok{main=}\OtherTok{NA}\NormalTok{, }\DataTypeTok{sub=}\OtherTok{NA}\NormalTok{)}
+\KeywordTok{axis}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{at=}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(abc), }\DataTypeTok{labels=}\NormalTok{abc}\OperatorTok{$}\NormalTok{TrDate)}
+\KeywordTok{axis}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DataTypeTok{tck=}\DecValTok{1}\NormalTok{, }\DataTypeTok{col.ticks=}\StringTok{"lightgray"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{0}\OperatorTok{:}\DecValTok{10}\NormalTok{)\{}
+  \KeywordTok{abline}\NormalTok{(}\DataTypeTok{v=}\NormalTok{i}\OperatorTok{*}\KeywordTok{nrow}\NormalTok{(abc)}\OperatorTok{/}\DecValTok{10}\NormalTok{, }\DataTypeTok{lty=}\DecValTok{2}\NormalTok{, }\DataTypeTok{col=}\StringTok{"lightgray"}\NormalTok{)}
+\NormalTok{\}}
+
+\KeywordTok{lines}\NormalTok{(xyz}\OperatorTok{$}\NormalTok{signal, }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{'brown'}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h=}\DecValTok{0}\NormalTok{, }\DataTypeTok{col=}\StringTok{'purple'}\NormalTok{)}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\StringTok{'blue'}\NormalTok{, }\StringTok{'brown'}\NormalTok{), }\DataTypeTok{lty=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{), }\DataTypeTok{legend=}\KeywordTok{c}\NormalTok{(}\StringTok{'macd'}\NormalTok{, }\StringTok{'signal'}\NormalTok{), }\DataTypeTok{bty=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{0.6}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Technical-AnalysisBollingerChart_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# module A4 End}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# module A5}
+\CommentTok{# Technical Analysis: RSI, Relative Strength Index}
+
+\NormalTok{rsi14<-}\KeywordTok{RSI}\NormalTok{(abc}\OperatorTok{$}\NormalTok{ClosePrice, }\DataTypeTok{n=}\DecValTok{14}\NormalTok{)}
+\NormalTok{xyz<-}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{TrDate=}\NormalTok{abc}\OperatorTok{$}\NormalTok{TrDate, }\DataTypeTok{ClosePrice=}\NormalTok{abc}\OperatorTok{$}\NormalTok{ClosePrice, }\DataTypeTok{volume=}\NormalTok{abc}\OperatorTok{$}\NormalTok{volume, rsi14)}
+\KeywordTok{head}\NormalTok{(xyz,}\DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       TrDate ClosePrice   volume    rsi14
+## 1  03-Apr-20     774.65  4268501       NA
+## 2  07-Apr-20     801.65  5769216       NA
+## 3  08-Apr-20     807.10  6151093       NA
+## 4  09-Apr-20     812.80  6410629       NA
+## 5  13-Apr-20     865.45  9462929       NA
+## 6  15-Apr-20     880.15 10435586       NA
+## 7  16-Apr-20     911.65  6980628       NA
+## 8  17-Apr-20     932.90  5827735       NA
+## 9  20-Apr-20     915.60  4958437       NA
+## 10 21-Apr-20     870.35  5122597       NA
+## 11 22-Apr-20     852.60  6090177       NA
+## 12 23-Apr-20     840.60  6322048       NA
+## 13 24-Apr-20     851.20  7960660       NA
+## 14 27-Apr-20     855.25  4224467       NA
+## 15 28-Apr-20     857.15  3773038 65.44365
+## 16 29-Apr-20     875.35  4841417 67.80607
+## 17 30-Apr-20     897.55  6333023 70.45897
+## 18 04-May-20     850.65  4678679 59.33495
+## 19 05-May-20     836.90  4296534 56.51771
+## 20 06-May-20     837.30  5081614 56.58229
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{layout}\NormalTok{(}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{), }\DataTypeTok{nrow=}\DecValTok{5}\NormalTok{, }\DataTypeTok{ncol=}\DecValTok{1}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(abc}\OperatorTok{$}\NormalTok{ClosePrice, }\DataTypeTok{xaxt=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\DecValTok{2}\NormalTok{, }\DataTypeTok{xlab=}\StringTok{"Date"}\NormalTok{, }\DataTypeTok{main=}\StringTok{""}\NormalTok{, }\DataTypeTok{sub=}\StringTok{""}\NormalTok{, }\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\KeywordTok{min}\NormalTok{(abc}\OperatorTok{$}\NormalTok{ClosePrice)}\OperatorTok{*}\FloatTok{0.95}\NormalTok{, }\KeywordTok{max}\NormalTok{(abc}\OperatorTok{$}\NormalTok{ClosePrice)}\OperatorTok{*}\FloatTok{1.05}\NormalTok{), }\DataTypeTok{ylab=}\StringTok{"Close Price"}\NormalTok{, }\DataTypeTok{mai=}\KeywordTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\FloatTok{0.1}\NormalTok{,}\FloatTok{0.5}\NormalTok{))}
+\KeywordTok{axis}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{at=}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(abc), }\DataTypeTok{labels=}\NormalTok{abc}\OperatorTok{$}\NormalTok{TrDate)}
+\KeywordTok{axis}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DataTypeTok{tck=}\DecValTok{1}\NormalTok{, }\DataTypeTok{col.ticks=}\StringTok{"lightgray"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{0}\OperatorTok{:}\DecValTok{10}\NormalTok{)\{}
+  \KeywordTok{abline}\NormalTok{(}\DataTypeTok{v=}\NormalTok{i}\OperatorTok{*}\KeywordTok{nrow}\NormalTok{(abc)}\OperatorTok{/}\DecValTok{10}\NormalTok{, }\DataTypeTok{lty=}\DecValTok{2}\NormalTok{, }\DataTypeTok{col=}\StringTok{"lightgray"}\NormalTok{)}
+\NormalTok{\}}
+
+\KeywordTok{plot}\NormalTok{(xyz}\OperatorTok{$}\NormalTok{rsi14, }\DataTypeTok{xaxt=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{, }\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{100}\NormalTok{), , }\DataTypeTok{xlab=}\StringTok{""}\NormalTok{, }\DataTypeTok{main=}\StringTok{""}\NormalTok{, }\DataTypeTok{sub=}\StringTok{""}\NormalTok{,  }\DataTypeTok{ylab=}\StringTok{"RSI"}\NormalTok{, }\DataTypeTok{mai=}\KeywordTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\FloatTok{0.1}\NormalTok{,}\FloatTok{0.5}\NormalTok{))}
+\KeywordTok{axis}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{at=}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(abc), }\DataTypeTok{labels=}\NormalTok{abc}\OperatorTok{$}\NormalTok{TrDate)}
+\KeywordTok{axis}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DataTypeTok{tck=}\DecValTok{1}\NormalTok{, }\DataTypeTok{col.ticks=}\StringTok{"lightgray"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{0}\OperatorTok{:}\DecValTok{10}\NormalTok{)\{}
+  \KeywordTok{abline}\NormalTok{(}\DataTypeTok{v=}\NormalTok{i}\OperatorTok{*}\KeywordTok{nrow}\NormalTok{(abc)}\OperatorTok{/}\DecValTok{10}\NormalTok{, }\DataTypeTok{lty=}\DecValTok{2}\NormalTok{, }\DataTypeTok{col=}\StringTok{"lightgray"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Technical-AnalysisBollingerChart_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# module A5 End}
+\end{Highlighting}
+\end{Shaded}
+
+\end{document}
